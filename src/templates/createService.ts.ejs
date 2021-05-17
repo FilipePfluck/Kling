@@ -1,0 +1,20 @@
+import AppError from '@shared/errors/AppError';
+import { inject, injectable } from 'tsyringe';
+import ICreate<%= props.capitalizedName %>Dto from '../interfaces/ICreate<%= props.capitalizedName %>Dto'
+
+import I<%= props.capitalizedName %>Repository from '../interfaces/I<%= props.capitalizedName %>Repository';
+
+@injectable()
+export default class Create<%= props.capitalizedName %> {
+    constructor (
+        @inject('<%= props.pluralName %>Repository')
+        private <%= props.name %>Repository: I<%= props.capitalizedName %>Repository
+    ){}
+
+    public async execute(data: ICreate<%= props.capitalizedName %>Dto){
+    
+        const <%= props.name %> = await this.<%= props.name %>Repository.create(data)
+
+        return <%= props.name %>
+    }
+}

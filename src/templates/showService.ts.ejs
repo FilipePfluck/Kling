@@ -1,0 +1,28 @@
+import { injectable, inject } from 'tsyringe'
+
+import AppError from '@shared/errors/AppError'
+import I<%= props.capitalizedName %>Repository from '../interfaces/I<%= props.capitalizedName %>Repository';
+
+import <%= props.capitalizedName %> from '../infra/typeorm/entities/<%= props.name %>'
+
+interface IRequest {
+    id: string,
+}
+
+@injectable()
+export default class Show<%= props.capitalizedName %> {
+    constructor (
+        @inject('<%= props.pluralName %>Repository')
+        private <%= props.name %>Repository: I<%= props.capitalizedName %>Repository
+    ){}
+
+    public async execute({ id }: IRequest):Promise<<%= props.capitalizedName %>>{
+        const <%= props.name %> = await this.<%= props.name %>Repository.findById(id)
+
+        if(!<%= props.name %>){
+            throw new AppError('<%= props.capitalizedName %> does not exists')
+        }
+
+        return <%= props.name %>
+    }
+}

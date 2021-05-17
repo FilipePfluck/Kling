@@ -51,7 +51,7 @@ const command: GluegunCommand = {
     })
 
     await template.generate({
-        template: '.gitngnore.ejs',
+        template: '.gitignore.ejs',
         target: '.gitignore'
     })
     

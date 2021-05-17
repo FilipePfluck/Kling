@@ -1,0 +1,15 @@
+import { Entity, Column,  PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm'
+
+@Entity('<%= props.pluralName %>')
+export default class <%= props.capitalizedName %> {
+    @PrimaryGeneratedColumn('uuid')
+    id: string
+
+    //TO DO
+
+    @CreateDateColumn()
+    created_at: Date
+
+    @UpdateDateColumn()
+    updated_at: Date
+}

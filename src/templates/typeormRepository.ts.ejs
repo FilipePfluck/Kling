@@ -1,0 +1,42 @@
+import ICreate<%= props.capitalizedName %>Dto from "@modules/<%= props.pluralName %>/interfaces/ICreate<%= props.capitalizedName %>Dto";
+import I<%= props.capitalizedName %>Repository from "@modules/<%= props.pluralName %>/interfaces/I<%= props.capitalizedName %>Repository";
+import { getRepository, Repository } from "typeorm";
+import <%= props.capitalizedName %> from "../entities/<%= props.name %>";
+
+export default class <%= props.capitalizedName %>Repository implements I<%= props.capitalizedName %>Repository {
+    private ormRepository: Repository<<%= props.capitalizedName %>>
+
+    constructor(){
+        this.ormRepository = getRepository(<%= props.capitalizedName %>)
+    }
+
+    public async create(data: ICreate<%= props.capitalizedName %>Dto){
+        const <%= props.name %> = this.ormRepository.create(data)
+
+        await this.ormRepository.save(<%= props.name %>)
+
+        return <%= props.name %>
+    }
+
+    public async find(){
+        const <%= props.pluralName %> = await this.ormRepository.find()
+
+        return <%= props.pluralName %>
+    }
+
+    public async findById(id: string){
+        const <%= props.name %> = await this.ormRepository.findOne(id)
+
+        return <%= props.name %>
+    }
+
+    public async save(data: <%= props.capitalizedName %>){
+        const <%= props.name %> = await this.ormRepository.save(data)
+
+        return <%= props.name %>
+    }
+
+    public async delete(id: string){
+        await this.ormRepository.delete(id)
+    }
+}

@@ -1,0 +1,21 @@
+import { injectable, inject } from 'tsyringe'
+
+import AppError from '@shared/errors/AppError'
+import I<%= props.capitalizedName %>Repository from '../interfaces/I<%= props.capitalizedName %>Repository';
+
+import <%= props.capitalizedName %> from '../infra/typeorm/entities/<%= props.name %>'
+
+@injectable()
+export default class Update<%= props.capitalizedName %> {
+    constructor (
+        @inject('<%= props.pluralName %>Repository')
+        private <%= props.name %>Repository: I<%= props.capitalizedName %>Repository
+    ){}
+
+    public async execute(data: <%= props.capitalizedName %>){
+    
+        const <%= props.name %> = await this.<%= props.name %>Repository.save(data)
+
+        return <%= props.name %>
+    }
+}

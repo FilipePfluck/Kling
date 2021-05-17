@@ -1,0 +1,16 @@
+import { Router } from 'express'
+
+import <%= props.capitalizedName %>Controller from '../controllers/<%= props.capitalizedName %>Controller'
+
+const <%= props.name %>Controller = new <%= props.capitalizedName %>Controller()
+
+const <%= props.name %>Routes = Router()
+
+<%= props.name %>Routes.post('/', <%= props.name %>Controller.create)
+<%= props.name %>Routes.get('/', <%= props.name %>Controller.index)
+<%= props.name %>Routes.put('/:id', <%= props.name %>Controller.update)
+<%= props.name %>Routes.delete('/:id', <%= props.name %>Controller.delete)
+
+<%= props.name %>Routes.get('/:id', <%= props.name %>Controller.show)
+
+export default <%= props.name %>Routes

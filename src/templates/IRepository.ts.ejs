@@ -1,0 +1,10 @@
+import ICreate<%= props.capitalizedName %>Dto from "./ICreate<%= props.capitalizedName %>Dto";
+import <%= props.capitalizedName %> from "../infra/typeorm/entities/<%= props.name %>";
+
+export default interface I<%= props.capitalizedName %>Repository {
+    create(data: ICreate<%= props.capitalizedName %>Dto): Promise<<%= props.capitalizedName %>> 
+    save(data: <%= props.capitalizedName %>): Promise<<%= props.capitalizedName %>>
+    find(): Promise<<%= props.capitalizedName %>[]>
+    findById(id: string): Promise<<%= props.capitalizedName %> | undefined>
+    delete(id: string): Promise<void>
+}

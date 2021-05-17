@@ -1,0 +1,82 @@
+import { Request, Response } from 'express'
+import { container } from 'tsyringe'
+
+import Create<%= props.capitalizedName %> from '@modules/<%= props.pluralName %>/services/Create<%= props.capitalizedName %>'
+import List<%= props.capitalizedName %> from '@modules/<%= props.pluralName %>/services/List<%= props.capitalizedName %>'
+import Show<%= props.capitalizedName %> from '@modules/<%= props.pluralName %>/services/Show<%= props.capitalizedName %>'
+import Update<%= props.capitalizedName %> from '@modules/<%= props.pluralName %>/services/Update<%= props.capitalizedName %>'
+import Delete<%= props.capitalizedName %> from '@modules/<%= props.pluralName %>/services/Delete<%= props.capitalizedName %>'
+
+export default class <%= props.capitalizedName %>Controller {
+    public async create(request: Request, response: Response){
+        try{
+            const create<%= props.capitalizedName %> = container.resolve(Create<%= props.capitalizedName %>)
+
+            const data = request.body
+
+            const <%= props.name %> = await create<%= props.capitalizedName %>.execute(data)
+
+            return response.json(<%= props.name %>)
+        }catch(error){
+            return response.status(404).json({error: error.message})
+        }
+    }
+
+    public async index(request: Request, response: Response){
+        try{
+            const list<%= props.capitalizedName %> = container.resolve(List<%= props.capitalizedName %>) 
+            
+            const <%= props.pluralName %> = await list<%= props.capitalizedName %>.execute()
+
+            return response.json(<%= props.pluralName %>)
+        }catch(error){
+            return response.status(404).json({error: error.message})
+        }
+    }
+
+    public async show(request: Request, response: Response) {
+        try{
+            const {id} = request.params
+
+            const show<%= props.capitalizedName %> = container.resolve(Show<%= props.capitalizedName %>)
+            
+            const <%= props.name %> = await show<%= props.capitalizedName %>.execute({id})
+
+            return response.json(<%= props.name %>)
+        }catch(error){
+            return response.status(404).json({error: error.message})
+        }
+    }
+
+    public async update(request: Request, response: Response) { 
+        try{
+            const {id} = request.params
+            const data = request.body
+
+            const update<%= props.capitalizedName %> = container.resolve(Update<%= props.capitalizedName %>)
+
+            const <%= props.name %> = update<%= props.capitalizedName %>.execute({
+                id,
+                ...data
+            })
+
+            return response.json(<%= props.name %>)
+        }catch(error){
+            return response.status(404).json(error.message)
+        }
+    }
+
+    public async delete(request: Request, response: Response) {
+        try{
+            const {id} = request.params
+
+            const delete<%= props.capitalizedName %> = container.resolve(Delete<%= props.capitalizedName %>)
+            
+            await delete<%= props.capitalizedName %>.execute({id})
+
+            return response.status(204).send()
+        }catch(error){
+            return response.status(404).json({error: error.message})
+        }
+    }
+} 
