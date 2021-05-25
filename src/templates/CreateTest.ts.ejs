@@ -1,0 +1,25 @@
+import Fake<%= props.capitalizedName %>Repository from './FakeRepositories/Fake<%= props.capitalizedName %>Repository'
+
+import Create<%= props.capitalizedName %> from '../services/Create<%= props.capitalizedName %>'
+
+import AppError from '@shared/errors/AppError'
+
+let fake<%= props.capitalizedName %>Repository: Fake<%= props.capitalizedName %>Repository
+
+let create<%= props.capitalizedName %>: Create<%= props.capitalizedName %>
+
+describe('Create<%= props.capitalizedName %>', ()=> {
+    beforeEach(()=>{
+        fake<%= props.capitalizedName %>Repository = new Fake<%= props.capitalizedName %>Repository()
+
+        create<%= props.capitalizedName %> = new Create<%= props.capitalizedName %>(fake<%= props.capitalizedName %>Repository)
+    })
+
+    it("should be able to create a new <%= props.name %>", async() => {
+        const <%= props.name %> = await create<%= props.capitalizedName %>.execute({
+            //TODO
+        })
+
+        expect(<%= props.name %>).toHaveProperty('id')
+    })
+})

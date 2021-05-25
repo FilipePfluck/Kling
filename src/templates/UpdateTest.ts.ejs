@@ -1,0 +1,30 @@
+import Fake<%= props.capitalizedName %>Repository from './FakeRepositories/Fake<%= props.capitalizedName %>Repository'
+
+import Update<%= props.capitalizedName %> from '../services/Update<%= props.capitalizedName %>'
+
+import AppError from '@shared/errors/AppError'
+
+let fake<%= props.capitalizedName %>Repository: Fake<%= props.capitalizedName %>Repository
+
+let update<%= props.capitalizedName %>: Update<%= props.capitalizedName %>
+
+describe('Update<%= props.capitalizedName %>', () => {
+    beforeEach(() => {
+        fake<%= props.capitalizedName %>Repository = new Fake<%= props.capitalizedName %>Repository()
+
+        update<%= props.capitalizedName %> = new Update<%= props.capitalizedName %>(fake<%= props.capitalizedName %>Repository)
+    })
+
+    it("should be able to update the <%= props.name %>", async () => {
+        const <%= props.name %> = await fake<%= props.capitalizedName %>Repository.create({
+            //todo
+        })
+
+        const updated<%= props.capitalizedName %> = await update<%= props.capitalizedName %>.execute({
+            //todo
+        })
+
+        //expect(updated<%= props.capitalizedName %>.name).toBe('filipe')
+        //expect(updated<%= props.capitalizedName %>.email).toBe('filipe@gmail.com')
+    })
+})

@@ -24,9 +24,9 @@ const command: GluegunCommand = {
     if(!name){
         print.error('You need to specify a name')
         return
-    }
+    }  
 
-    print.info('creating migration file')
+    print.info('creating migration file...')
 
     await system.exec(`yarn typeorm migration:create -n "create${pluralName}"`)
 
@@ -87,6 +87,27 @@ const command: GluegunCommand = {
         target: moduleDir + `/services/Delete${capitalizedName}.ts`,
         props: { name, pluralName, capitalizedName }
     })
+
+    print.info('generating tests...')
+
+    await template.generate({
+        template: 'fakeRepository.ts.ejs',
+        target: moduleDir + `/tests/FakeRepositories/Fake${capitalizedName}Repository.ts`,
+        props: { name, pluralName, capitalizedName }
+    })
+
+    await template.generate({
+        template: 'CreateTest.ts.ejs',
+        target: moduleDir + `/tests/Create${capitalizedName}.spec.ts`,
+        props: { name, pluralName, capitalizedName }
+    })
+
+    await template.generate({
+        template: 'UpdateTest.ts.ejs',
+        target: moduleDir + `/tests/Update${capitalizedName}.spec.ts`,
+        props: { name, pluralName, capitalizedName }
+    })
+    
 
     print.info('generating http folder...')
 

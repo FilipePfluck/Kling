@@ -31,6 +31,7 @@ const command: GluegunCommand = {
     await system.exec('yarn add typescript ts-node-dev tsconfig-paths -D')
     await system.exec('yarn add jest ts-jest -D')
     await system.exec('yarn add @types/jest -D')
+    await system.exec(`yarn add uuidv4`)
     
     print.success('dependencies installed')
 

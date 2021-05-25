@@ -1,0 +1,43 @@
+import { uuid }  from 'uuidv4'
+
+import ICreate<%= props.capitalizedName %>Dto from "@modules/<%= props.pluralName %>/interfaces/ICreate<%= props.capitalizedName %>Dto";
+import I<%= props.capitalizedName %>Repository from "@modules/<%= props.pluralName %>/interfaces/I<%= props.capitalizedName %>Repository";
+
+import <%= props.capitalizedName %> from '../../infra/typeorm/entities/<%= props.name %>'
+
+export default class Fake<%= props.capitalizedName %>Repository 
+    implements I<%= props.capitalizedName %>Repository{
+        private <%= props.pluralName %>: <%= props.capitalizedName %>[] = []
+
+        public async find(): Promise<<%= props.capitalizedName %>[]>{
+            return this.<%= props.pluralName %>
+        }
+
+        public async findById(Id: string): Promise<<%= props.capitalizedName %> | undefined> {
+            const <%= props.name %> = this.<%= props.pluralName %>.find(<%= props.name %> => <%= props.name %>.id === Id)
+
+            return <%= props.name %>
+        }
+
+        public async create(data: ICreate<%= props.capitalizedName %>Dto): Promise<<%= props.capitalizedName %>>{
+            const <%= props.name %> = new <%= props.capitalizedName %>()
+
+            Object.assign(<%= props.name %>,{id: uuid(), ...data})
+
+            this.<%= props.pluralName %>.push(<%= props.name %>)
+
+            return <%= props.name %>
+        }
+
+        public async save(<%= props.name %>: <%= props.capitalizedName %>): Promise<<%= props.capitalizedName %>>{
+            const findIndex = this.<%= props.pluralName %>.findIndex(found<%= props.name %> => found<%= props.name %>.id === <%= props.name %>.id)
+
+            this.<%= props.pluralName %>[findIndex] = <%= props.name %>
+
+            return <%= props.name %>
+        }
+
+        public async delete(id: string): Promise<void> {
+            this.<%= props.pluralName %> = this.<%= props.pluralName %>.filter(<%= props.name %> => <%= props.name %>.id !== id)
+        }
+    }

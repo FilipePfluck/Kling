@@ -14,7 +14,15 @@ export default class Update<%= props.capitalizedName %> {
 
     public async execute(data: <%= props.capitalizedName %>){
     
-        const <%= props.name %> = await this.<%= props.name %>Repository.save(data)
+        const <%= props.name %> = await this.<%= props.name %>Repository.findById(id)
+
+        if(!<%= props.name %>){
+            throw new AppError('user not found')
+        }
+
+        //TO DO
+
+        await this.<%= props.name %>Repository.save(<%= props.name %>)
 
         return <%= props.name %>
     }
