@@ -1,25 +1,3 @@
 # kling CLI
 
-A CLI for kling.
-
-## Customizing your CLI
-
-Check out the documentation at https://github.com/infinitered/gluegun/tree/master/docs.
-
-## Publishing to NPM
-
-To package your CLI up for NPM, do this:
-
-```shell
-$ npm login
-$ npm whoami
-$ npm lint
-$ npm test
-(if typescript, run `npm run build` here)
-$ npm publish
-```
-
-# License
-
-MIT - see LICENSE
-
+O kling é uma CLI que eu desenvolvi para me ajudar no desenvolvimento de projetos backend. Ele cria uma estrutura inteira de um módulo DDD, já aplicando boas práticas como separação da camada de infra e injeção de dependências. Ele acelerou muito o meu processo de desenvolvimento. 
